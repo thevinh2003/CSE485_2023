@@ -28,13 +28,13 @@
                         <a class="nav-link" href="../index.php">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="category.php">Thể loại</a>
+                        <a class="nav-link" href="category/category.php">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="author.php">Tác giả</a>
+                        <a class="nav-link" href="author/author.php">Tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="article.php">Bài viết</a>
+                        <a class="nav-link" href="article/article.php">Bài viết</a>
                     </li>
                 </ul>
                 </div>
@@ -63,9 +63,8 @@
                 <div class="card mb-2" style="width: 100%;">
                     <div class="card-body">
                         <h5 class="card-title text-center">
-                            <a href="" class="text-decoration-none">Thể loại</a>
+                            <a href="./category.php" class="text-decoration-none">Thể loại</a>
                         </h5>
-
                         <h5 class="h1 text-center">
                             10
                         </h5>

@@ -1,3 +1,33 @@
+<?php 
+    require '../../connect.php';
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        // kiểm tra dữ liệu vừa nhập
+        $maTloai = $_POST['maTloai'];
+        $tenTloai = $_POST['tenTloai'];
+        try{
+            $query_check = $conn->prepare("SELECT * FROM theloai WHERE ma_tloai=?");
+            $query_check->execute([$maTloai]);
+            $result = $query_check->rowCount();
+            if($result == 0){
+                $error = "Thể loại không tồn tại.";
+                echo "<script>alert('{$error}');</script>";
+            }else{
+                $sql_update = "UPDATE theloai SET ten_tloai=? WHERE ma_tloai=?";
+                $stmt_update = $conn->prepare($sql_update);
+                $stmt_update->execute([$tenTloai, $maTloai]);
+    
+                $rowCount = $stmt_update->rowCount();
+                if($rowCount > 0){
+                    $mess ="Sửa tên thể loại thành công";
+                    header("Location: category.php?Mess=".urlencode($mess));
+                    exit();
+                }
+            }
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        } 
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,18 +77,32 @@
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Sửa thông tin thể loại</h3>
-                <form action="process_add_category.php" method="post">
-                <div class="input-group mt-3 mb-3">
+
+                <!-- đoạn này được thêm  -->
+                <?php
+                if(isset($_GET['id'])){
+                    $ma_tloai = $_GET['id'];
+                    $query = "SELECT * FROM theloai WHERE ma_tloai=:ma_tloai LIMIT 1";
+                    $statement = $conn->prepare($query);
+                    $data=[':ma_tloai'=>$ma_tloai];
+                    $statement->execute($data);
+                    $result= $statement->fetch(PDO::FETCH_OBJ);
+                }
+                ?>
+ 
+                <form action="edit_category.php" method="POST">
+                    <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatId">Mã thể loại</span>
-                        <input type="text" class="form-control" name="txtCatId" readonly value="1">
+                        <input type="text" class="form-control" name="maTloai" readonly value="<?= isset($result) ? $result->ma_tloai : '' ?>" >
                     </div>
 
                     <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblCatName">Tên thể loại</span>
-                        <input type="text" class="form-control" name="txtCatName" value = "Nhạc trữ tình">
+                        <span class="input-group-text" id="lbten_tloai">Tên thể loại</span>
+                        <input type="text" class="form-control" name="tenTloai" value ="<?= isset($result) ? $result->ten_tloai : '' ?>">
                     </div>
 
                     <div class="form-group  float-end ">
+                        <!-- <button class="btn btn-success" type = "submit" name="Edit" value="Lưu">Lưu lại</button> -->
                         <input type="submit" value="Lưu lại" class="btn btn-success">
                         <a href="category.php" class="btn btn-warning ">Quay lại</a>
                     </div>
