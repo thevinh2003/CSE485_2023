@@ -1,3 +1,38 @@
+<?php 
+require '../../connect.php';
+// Nhận dữ liệu khi post
+if($_SERVER["REQUEST_METHOD"]== "POST"){
+    // kiểm tra dữ liệu vừa nhập
+    $ten_tloai = $_POST['ten_tloai'];
+    try{
+        // truy vấn kiểm tra tên loại đã tồn tại hay chưa
+        $query_check = $conn->prepare("SELECT * FROM theloai WHERE ten_tloai=?");
+        $query_check->execute([$ten_tloai]);
+        $result = $query_check->rowCount();
+        if($result>0){
+            $error = "Tên loại đã tồn tại. Vui lòng ghi tên loại khác.";
+            echo "<script>alert('{$error}');</script>";
+        }
+        else{
+            $sql_insert = "INSERT INTO theloai (ten_tloai) VALUES (:ten_tloai)";
+            $stmt_insert = $conn->prepare($sql_insert);
+            $stmt_insert->bindParam(':ten_tloai',$ten_tloai, PDO::PARAM_STR);
+            $stmt_insert->execute();
+            // var_dump($stmt_insert);
+            // die;
+
+            $rowCount = $stmt_insert->rowCount();
+            if($rowCount > 0){
+                $mess ="Thêm tên thể loại thành công";
+                header("Location: category.php?Mess=".urlencode($mess));
+                exit();
+            }
+        }
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    } 
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,22 +79,29 @@
     </header>
     <main class="container mt-5 mb-5">
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
-        <div class="row">
-            <div class="col-sm">
-                <h3 class="text-center text-uppercase fw-bold">Thêm mới thể loại</h3>
-                <form action="process_add_category.php" method="post">
-                    <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblCatName">Tên thể loại</span>
-                        <input type="text" class="form-control" name="txtCatName" >
-                    </div>
-
-                    <div class="form-group  float-end ">
-                        <input type="submit" value="Thêm" class="btn btn-success">
-                        <a href="category.php" class="btn btn-warning ">Quay lại</a>
-                    </div>
-                </form>
+        <div class = "Edit">
+        <center><h2>Thêm mới thể loại</h2></center>
+        <?php
+            if(isset($_GET['error'])){
+                echo "<p style='background-color:red'>{$_GET['error']}</p>";
+            }
+        ?>
+        <form action="add_category.php" method="POST">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Tên thể loại</span>
+                <input type="text" class="form-control" name = "ten_tloai" required>
             </div>
-        </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 60px;">
+                <button class="btn btn-success" type = "submit" name="Add" value="Thêm">Thêm</button>
+                <button class="btn btn-warning" type="button" onclick="goBack()">Quay lại</button>
+                <script>
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
+            </div>
+        </form>
+    </div>
     </main>
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">
         <h4 class="text-center text-uppercase fw-bold">TLU's music garden</h4>

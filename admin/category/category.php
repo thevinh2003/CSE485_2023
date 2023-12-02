@@ -1,3 +1,7 @@
+<?php 
+session_start();
+require '../../connect.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +51,7 @@
         <div class="row">
             <div class="col-sm">
                 <a href="add_category.php" class="btn btn-success">Thêm mới</a>
-                <table class="table">
+                <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -57,27 +61,40 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php 
+                            $query ="SELECT ma_tloai,ten_tloai FROM theloai";
+                            $statement = $conn->prepare($query);
+                            $statement->execute();
+                            
+                            $result = $statement->fetchAll(PDO::FETCH_OBJ);
+                            if($result){
+                                foreach($result as $row){
+                                    ?>
+                                        <tr>
+                                            <td><?= $row->ma_tloai ?></td>
+                                            <td><?= $row->ten_tloai ?></td>
+                                            <td>
+                                                <a href="edit_category.php?id=<?= $row->ma_tloai; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            </td>
+                                            <td>
+                                                <a href="delete_category.php?id=<?= $row->ma_tloai; ?>"><i class="fa-solid fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                }
+                            }
+                            else
+                            {
+                                ?>
+                                <tr>
+                                    <td colspan="2">No Record Found</td>
+                                </tr>
+                                <?php
+                            }
+                        ?>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Nhạc trữ tình</td>
-                            <td>
-                                <a href="edit_category.php?id=1"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
+                            <td>  </td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Nhạc cách mạng</td>
-                            <td>
-                                <a href="edit_category.php?id=2"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href=""><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                       
                     </tbody>
                 </table>
             </div>
