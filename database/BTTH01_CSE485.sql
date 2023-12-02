@@ -1,4 +1,5 @@
 CREATE DATABASE BTTH01_CSE485
+GO
 use BTTH01_CSE485
 CREATE TABLE tacgia(
 	ma_tgia int UNSIGNED primary KEY NOT NULL,
@@ -41,8 +42,7 @@ INSERT INTO theloai VALUES (4, "Nhạc thiếu nhi");
 INSERT INTO theloai VALUES (5, "Nhạc quê hương");
 INSERT INTO theloai VALUES (6, "POP");
 INSERT INTO theloai VALUES (7, "Rock");
-INSERT INTO theloai VALUES (8, "R&B");
-DROP TABLE theloai
+INSERT INTO theloai VALUES (8, "R&B")
 INSERT INTO baiviet (ma_bviet, tieude, ten_bhat, ma_tloai, tomtat, ma_tgia, ngayviet)
 VALUES (
 1, 
