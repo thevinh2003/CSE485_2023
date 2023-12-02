@@ -1,39 +1,33 @@
 <?php
-
-session_start();
-if(isset($_SESSION['Login'])){
-    header("location:javascript://history.go(-1)");
-}
-if(isset($_POST['Login'])){
+if(isset($_POST['Register'])){
     $user = $_POST['Username'];
     $pass = $_POST['Pass'];
 
+    // Băm mật khẩu
+    $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
+
+    // Truy vấn kiểm tra tên người dùng hoặc email đã tồn tại chưa
     try{
-        require 'connect.php';
-        $sql_check = "SELECT * FROM users WHERE Username = '$user'";
-        $stmt = $conn->prepare($sql_check);
-        $stmt->execute();
+        // Bước 1: Kết nối DBServer
+        require_once("connect.php");
 
-        if (!$stmt) {
-            echo "Lỗi truy vấn: " . $conn->errorInfo()[2];
-        } else{
-            if($stmt->rowCount() > 0){
-                $users = $stmt->fetch();
-                $pass_hash = $users['password'];
-                if(password_verify($pass,$pass_hash)){
-                    session_start();
-                    $_SESSION['Login'] = $users['username'];
-                    $_SESSION['Admin'] = $users['isAdmin'] == 1 ? true : false;
-                    header("Location:admin/index.php");
-                }else{
-                    header("Location:login.php?error=Mật khẩu không khớp");
-                }
-            }else{
-                header("Location:login.php?error=Người dùng không tồn tại");
-            }
+        // Kiểm tra tên người dùng hoặc email đã tồn tại trong cơ sở dữ liệu
+        $sql_check = "SELECT * FROM users WHERE username = '$user'";
+        $stmt_check = $conn->prepare($sql_check);
+        $stmt_check->execute();
+
+        if($stmt_check->rowCount() > 0){
+            // Tên người dùng hoặc email đã tồn tại, hiển thị thông báo lỗi
+            header("Location: register.php?error=Tên hoặc email đã tồn tại");
+        }else{
+            // Tên người dùng và email chưa tồn tại, thêm thông tin mới vào cơ sở dữ liệu
+            $sql_insert = "INSERT INTO users VALUES ('$user', '$hashed_password', 0)";
+            $stmt_insert = $conn->prepare($sql_insert);
+            $stmt_insert->execute();
+
+            // Đăng ký thành công
+            header("Location: login.php");
         }
-
-
     }catch(PDOException $e){
         echo $e->getMessage();
     }
@@ -88,9 +82,6 @@ if(isset($_POST['Login'])){
     footer{
         border: 1px solid black;
     }
-    hr{
-        margin: 0;
-    }
 </style>
 <body>
     <header>
@@ -124,8 +115,8 @@ if(isset($_POST['Login'])){
             }
         ?>
         <div class = "box">
-            <h3 style = "color: white">Sign in</h3><hr>
-            <form action="login.php" method="POST">
+            <h3 style = "color: white">Register</h3><hr>
+            <form action="register.php" method="post">
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="bi bi-person-fill"></i></span>
                     <input type="text" class="form-control" placeholder="Username" name ="Username" aria-describedby="addon-wrapping">
@@ -134,19 +125,9 @@ if(isset($_POST['Login'])){
                     <span class="input-group-text" id="addon-wrapping"><i class="bi bi-key-fill"></i></span>
                     <input type="password" class="form-control" placeholder="Password" name ="Pass" aria-describedby="addon-wrapping">
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                    <label class="form-check-label" for="flexCheckChecked" style = "color: white">
-                        Remember Me
-                    </label>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 60px;">
+                    <button class="btn btn-warning" name = "Register" type = "submit">Register</button>
                 </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 65px;">
-                    <button class="btn btn-warning" name = "Login" type = "submit">Login</button>
-                </div>
-                <hr>
-                <center><p>Don't have an account? <a href = "register.php">Sign up</a></p>
-                <p><a href = "#">Forgot your password?</a></p>
-            </center>
             <form>
         </div>
     </div>
