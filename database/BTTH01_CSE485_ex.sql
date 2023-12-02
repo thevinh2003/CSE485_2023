@@ -75,7 +75,7 @@ DELIMITER ;
 -- l.Bổ sung thêm bảng Users để lưu thông tin Tài khoản đăng nhập và sử dụng cho chức năng Đăng nhập/Quản trị trang web.
 CREATE TABLE Users
 (
-	username VARCHAR(30) NOT NULL UNIQUE PRIMARY KEY,
-	pass VARCHAR(255) NOT NULL,
+	username VARCHAR(30) NOT NULL PRIMARY KEY,
+	password VARCHAR(255) NOT NULL,
 	isAdmin BIT NOT NULL DEFAULT 0,
 );
