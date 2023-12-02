@@ -35,10 +35,10 @@ $baiviet = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <a class="nav-link" aria-current="page" href="../index.php">Trang chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="category.php">Thể loại</a>
+                            <a class="nav-link" href="../category/category.php">Thể loại</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="author.php">Tác giả</a>
+                            <a class="nav-link" href="../author/author.php">Tác giả</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active fw-bold" href="article.php">Bài viết</a>
