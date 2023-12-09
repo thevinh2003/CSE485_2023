@@ -1,5 +1,5 @@
 <?php 
-    require '../../connect.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/BTTH1/connect.php';
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         try {
             $maBaiViet = $_POST['mabaiviet'];
