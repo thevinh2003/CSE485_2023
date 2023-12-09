@@ -94,6 +94,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="article/article.php"><b>Bài viết</b></a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../handleLogout.php"><b>Logout</b></a>
+                        </li>
                     </ul>
                 </div>
             </div>

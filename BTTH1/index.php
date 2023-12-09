@@ -47,6 +47,11 @@ try {
                         <li class="nav-item">
                             <a class="nav-link" href="admin/index.php">Admin</a>
                         </li>
+                        <?php if(isset($_SESSION['Login'])): ?>
+                                <li class="nav-item">
+                                <a class="nav-link" href="handleLogout.php">Logout</a>
+                                </li>
+                        <?php endif; ?>
                     </ul>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" placeholder="Nội dung cần tìm" aria-label="Search">
