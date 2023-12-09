@@ -18,8 +18,6 @@ if($_SERVER["REQUEST_METHOD"]== "POST"){
             $stmt_insert = $conn->prepare($sql_insert);
             $stmt_insert->bindParam(':ten_tloai',$ten_tloai, PDO::PARAM_STR);
             $stmt_insert->execute();
-            // var_dump($stmt_insert);
-            // die;
 
             $rowCount = $stmt_insert->rowCount();
             if($rowCount > 0){
