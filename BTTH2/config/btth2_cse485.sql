@@ -23,5 +23,3 @@ CREATE TABLE `cms_posts` (
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `updated` datetime NOT NULL DEFAULT current_timestamp()
 )
------ INSERT DATA -------
-INSERT INTO 'cms_posts' (title, message, )
