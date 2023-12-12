@@ -50,7 +50,7 @@ $(document).ready(function () {
   });
 
   // Xử lý xóa bài viết
-  $("a.btnDelete").click(function (e) {
+  $("tbody").on("click", ".btnDelete", function (e) {
     e.preventDefault();
     var id = $(this).attr("data-id");
     var yes = confirm("Bạn có chắc chắn muốn xóa bài viết này?");

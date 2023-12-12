@@ -11,19 +11,28 @@ require '../components/Header.php';
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
                         <a href="dashboard.php" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                            <i class="fa-solid fa-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
                         </a>
                     </li>
                     <li>
                         <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                             <li>
-                                <a href="#" class="btnDashboard nav-link px-0"> <span class="d-none d-sm-inline">User</span></a>
+                                <a href="#" class="btnDashboard nav-link px-0">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span class="d-none d-sm-inline">User</span>
+                                </a>
                             </li>
                             <li class="w-100">
-                                <a href="#" class="btnDashboard nav-link px-0"> <span class="d-none d-sm-inline">Post</span></a>
+                                <a href="#" class="btnDashboard nav-link px-0"> 
+                                    <i class="fa-solid fa-book"></i>
+                                    <span class="d-none d-sm-inline">Post</span>
+                                </a>
                             </li>
                             <li>
-                                <a href="#" class="btnDashboard nav-link px-0"> <span class="d-none d-sm-inline">Category</span></a>
+                                <a href="#" class="btnDashboard nav-link px-0">
+                                    <i class="fa-solid fa-table-columns"></i>
+                                     <span class="d-none d-sm-inline">Category</span>
+                                </a>
                             </li>
                         </ul>
                     </li>
