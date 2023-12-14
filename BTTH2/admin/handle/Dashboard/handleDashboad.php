@@ -1,5 +1,5 @@
 <?php 
-    require '/LARAGON_SERVER/laragon/www/BTTH_CSE485/BTTH2/config/Database.php';
+    require '/xampp/htdocs/BTTH_CSE485/BTTH2/config/Database.php';
     global $conn;
     $sql = "SELECT COUNT(*) FROM cms_user";
     $stmt = $conn->prepare($sql);

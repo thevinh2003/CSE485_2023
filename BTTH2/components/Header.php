@@ -34,9 +34,15 @@
               <li><a class="dropdown-item" href="/BTTH_CSE485/BTTH2/admin/category.php">Categories</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/BTTH_CSE485/BTTH2/admin/login.php">Login</a>
-          </li>
+          <?php session_start(); if(isset($_SESSION['Login'])): ?>
+            <li class="nav-item">
+              <a class="nav-link" href="/BTTH_CSE485/BTTH2/admin/handle/handleLogout.php">Logout</a>
+            </li>
+            <?php else: ?>
+              <li class="nav-item">
+                <a class="nav-link" href="/BTTH_CSE485/BTTH2/admin/login.php">Login</a>
+              </li>
+          <?php endif ?>
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
