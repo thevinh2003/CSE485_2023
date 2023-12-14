@@ -9,7 +9,7 @@ $postList = $Post->getPostByPage($_POST['page']);
     <tr>
         <td> <?= $item['id'] ?> </td>
         <td> <?= $item['title'] ?> </td>
-        <td> <?= $item['message'] ?></td>
+        <td> <?= $item['last_name'] ?> </td>
         <td>
             <?php
             if ($item['status'] == "published") {

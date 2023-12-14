@@ -27,7 +27,7 @@ include DOCUMENT_ROOT . '/BTTH2/components/Header.php';
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Message</label>
-            <input value="<?= $data['message'] ?>" type="text" name="message" class="form-control" id="exampleInputPassword1">
+            <input value="<?= $data['message'] ?>" name="message" type="text" class="form-control" id="exampleInputPassword1">
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Category id</label>
@@ -35,7 +35,7 @@ include DOCUMENT_ROOT . '/BTTH2/components/Header.php';
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">User id</label>
-            <input value="<?= $data['userid'] ?>" type="text" name="userid" class="form-control" id="exampleInputPassword1">
+            <input value="<?= $data['userid'] ?>" type="text" name="userid" class="form-control" id="exampleInputPassword1"></input>
         </div>
         <div class=" mb-3">
             <label for="exampleInputPassword1" class="form-label">Status</label>
