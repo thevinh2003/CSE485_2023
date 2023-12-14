@@ -25,7 +25,9 @@ class Post
         {
                 $offset = ($page - 1) * 5;
                 try {
-                        $sql = "SELECT * FROM cms_posts ORDER BY id DESC LIMIT 5 OFFSET $offset";
+                        $sql = "SELECT cms_posts.*, cms_user.last_name FROM cms_posts 
+                                JOIN cms_user on cms_user.id = cms_posts.userid ORDER BY id 
+                                DESC LIMIT 5 OFFSET $offset";
                         $stmt = $this->conn->prepare($sql);
                         $stmt->execute();
                         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);

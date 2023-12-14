@@ -17,7 +17,7 @@ if(isset($_GET['isHaveHeader'])){
             <tr>
                 <th>#</th>
                 <th>Title</th>
-                <th>Message</th>
+                <th>User</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -33,7 +33,7 @@ if(isset($_GET['isHaveHeader'])){
                 <tr>
                     <td> <?= $item['id'] ?> </td>
                     <td> <?= $item['title'] ?> </td>
-                    <td> <?= $item['message'] ?></td>
+                    <td> <?= $item['last_name'] ?> </td>
                     <td>
                         <?php 
                             if($item['status'] == "published"){
