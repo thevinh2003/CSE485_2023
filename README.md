@@ -2,10 +2,6 @@
 
 # CSE485 - Thực hành môn học Công nghệ Web
 
-## Demo
-
-<img src="https://pasteboard.co/gs42LnYOL0kC.png" width="600" height="400"/>
-
 ## Features
 
 ✨ Fully Responsive\
