@@ -1,3 +1,4 @@
+CREATE DATABASE btth2_cse
 CREATE TABLE `cms_user` (
   `id` int(11) NOT NULL PRIMARY KEY auto_increment,
   `first_name` varchar(50) NOT NULL,
