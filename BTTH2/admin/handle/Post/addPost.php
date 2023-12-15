@@ -1,4 +1,10 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if(!isset($_SESSION['Login']) && $_SESSION['Admin'] != 1){
+    header('Location: login.php');
+}
 define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT'] . '/BTTH_CSE485');
 include DOCUMENT_ROOT . '/BTTH2/components/Header.php';
 ?>

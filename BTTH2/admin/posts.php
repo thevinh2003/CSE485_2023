@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(!isset($_SESSION['Login']) && $_SESSION['Admin'] != 1){
+    header('Location: login.php');
+}
 require 'class/Post.php';
 if(isset($_GET['isHaveHeader'])){
     if(!$_GET['isHaveHeader'] == "None"){
