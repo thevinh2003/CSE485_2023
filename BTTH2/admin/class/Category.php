@@ -1,5 +1,5 @@
 <?php 
-    class Category{
+class Category{
         private $id;
         private $name;
         function __construct($id,$name) {
