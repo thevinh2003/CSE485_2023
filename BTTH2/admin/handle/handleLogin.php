@@ -13,7 +13,9 @@
             $user = $stmt->fetch();
             $pass_hash = $user['password'];
             if(password_verify($password,$pass_hash)){
-                session_start();
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
                 $_SESSION['Login'] = $user;
                 $_SESSION['Admin'] = $user['type'] == 1 ? true : false;
                 header("Location: ../dashboard.php");

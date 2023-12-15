@@ -16,6 +16,7 @@ $(document).ready(function () {
       $.ajax({
         url: "users.php",
         type: "GET",
+        data: { isHaveHeader: "None" },
         success: function (res) {
           dashboardContent.html(res);
         },
