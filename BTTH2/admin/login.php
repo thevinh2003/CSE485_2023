@@ -11,7 +11,7 @@ if(isset($_SESSION['Login'])) {
     <h3 class="text-center">LOGIN</h3>
     <?php 
         if(isset($_GET['error'])) {
-            echo "<div class='alert aleart-success'>".$_GET['error']."</div>";
+            echo "<div class='alert alert-danger'>".$_GET['error']."</div>";
         }
     ?>
     <form method='POST' action="handle/handleLogin.php">
