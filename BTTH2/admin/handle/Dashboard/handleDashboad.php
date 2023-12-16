@@ -1,5 +1,5 @@
 <?php 
-    require '/Users/ACER/Downloads/WebEnv/nginx-1.24.0/html/BTTH_CSE485/BTTH2/config/Database.php';
+    require '/LARAGON_SERVER/laragon/www/BTTH_CSE485/BTTH2/config/Database.php';
     global $conn;
     $sql = "SELECT COUNT(*) FROM cms_user";
     $stmt = $conn->prepare($sql);

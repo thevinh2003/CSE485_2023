@@ -1,7 +1,13 @@
 <?php
 require '../components/Header.php';
+if (session_status() !== PHP_SESSION_ACTIVE || session_id() === ""){
+    session_start(); 
+}
+if(!isset($_SESSION['Login']) && $_SESSION['Admin'] != 1){
+    header('Location: login.php');
+}
 ?>
-<div class="container-fluid overflow-x-hidden">
+<div class="container-fluid">
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">

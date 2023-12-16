@@ -6,15 +6,15 @@
         header('Location: login.php');
     }
     require '../../../config/Database.php';
-    require '../../class/Post.php';
+    require '../../class/User.php';
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $id = $_POST['id'];
         if(!isset($id)) {
             exit;
         }
         global $conn;
-        $Post = new Post($conn);
-        $kq = $Post->deletePost($id);
+        $User = new User($conn);
+        $kq = $User->deleteUser($conn, $id);
         echo json_encode(['status' => $kq]);
         exit;
     }
