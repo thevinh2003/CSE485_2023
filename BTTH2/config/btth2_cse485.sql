@@ -22,4 +22,4 @@ CREATE TABLE `cms_posts` (
   `status` enum('published','draft','archived','') NOT NULL DEFAULT 'published',
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `updated` datetime NOT NULL DEFAULT current_timestamp()
-)	
+)

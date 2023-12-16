@@ -1,4 +1,4 @@
-<?php
+<?php 
 require '../config/Database.php';
 include '../components/Header.php';
 
