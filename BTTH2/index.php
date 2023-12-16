@@ -15,7 +15,7 @@ $listArticle = $Article->getListArticle($conn, $currentQuantity);
     <?php foreach ($listArticle as $item) : ?>
         <article class="articleItem">
             <h3>
-                <a class="text-decoration-none" href=""><?= $item['title'] ?></a>
+                <a class="text-decoration-none" href="view.php?aid=<?= $item['id'] ?>"><?= $item['title'] ?></a>
             </h3>
             <p class="fst-italic">
                 <span class="fw-bolder">Published on:</span> <?= date("d F Y", strtotime($item['created'])) ?>

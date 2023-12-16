@@ -1,7 +1,7 @@
 <?php
 require '../components/Header.php';
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+if (session_status() !== PHP_SESSION_ACTIVE || session_id() === ""){
+    session_start(); 
 }
 if(!isset($_SESSION['Login']) && $_SESSION['Admin'] != 1){
     header('Location: login.php');
