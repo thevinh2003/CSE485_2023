@@ -23,7 +23,7 @@ CREATE TABLE `cms_posts` (
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `updated` datetime NOT NULL DEFAULT current_timestamp()
 )
-
+SELECT * FROM  `cms_category`
 insert into cms_user (id, first_name, last_name, email, password) values (1, 'Cassie', 'Lillico', 'clillico0@businessweek.com', '$2a$04$vN3PFIQhR8Zpnhea3HhES.vc.4mEtKKmpV4WNxQO3OHuR3hooQ/GG');
 insert into cms_user (id, first_name, last_name, email, password) values (2, 'Bud', 'Twyning', 'btwyning1@i2i.jp', '$2a$04$xgAtuArks9cf6SuU9PXpROYLKWh57CstqJprVreMWvgmiQ8yUCcG.');
 insert into cms_user (id, first_name, last_name, email, password) values (3, 'Jenda', 'Lynthal', 'jlynthal2@cocolog-nifty.com', '$2a$04$yQKJgTiDEKCIVGH3k4LFouKt6GAD8ttQ3LDkZPH7UaqteB.We1QO.');
@@ -39,6 +39,7 @@ insert into cms_user (id, first_name, last_name, email, password) values (12, 'E
 insert into cms_user (id, first_name, last_name, email, password) values (13, 'Gare', 'Guare', 'gguarec@craigslist.org', '$2a$04$CZ/8lZ8kDR9dSjorvkG9uushbQnVyicIUhMaPnuj7jswGygQJrJQS');
 insert into cms_user (id, first_name, last_name, email, password) values (14, 'Arlana', 'Spruce', 'aspruced@photobucket.com', '$2a$04$RCuchACR4oRPeMZNXzTJlu59B1su72QcNmU.mIaf27pITJzEpbQ7q');
 insert into cms_user (id, first_name, last_name, email, password) values (15, 'Klaus', 'Laugharne', 'klaugharnee@kickstarter.com', '$2a$04$dfLDPbnJpuwNzMhowDqr.eem4.IT1gyJxtkhMRX6eswSezfmyWTey');
+insert into cms_user (id, first_name, last_name, email, password) VALUES (17, 'AT', 'Luyen', 'at@gmail.com', '$2y$10$CrcQfUYdJKO3GnMZtNOtCeaKcZafkYnSGkxhSrEzvFfpXSW3Ll0J.');
 
 insert into cms_category (id, name) values (1, 'Roofing (Asphalt)');
 insert into cms_category (id, name) values (2, 'Roofing (Asphalt)');
