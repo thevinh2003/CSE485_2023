@@ -1,27 +1,27 @@
 <?php
 if(isset($_POST['Register'])){
-    $user = $_POST['username'];
-    $pass = $_POST['pass'];
+    $user = $_POST['Username'];
+    $pass = $_POST['Pass'];
 
     // Băm mật khẩu
     $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
-    
+
     // Truy vấn kiểm tra tên người dùng hoặc email đã tồn tại chưa
     try{
         // Bước 1: Kết nối DBServer
-        $conn = new PDO("mysql:host=localhost;dbname=btth01_cse485", "root", "123");
+        require_once("connect.php");
 
         // Kiểm tra tên người dùng hoặc email đã tồn tại trong cơ sở dữ liệu
         $sql_check = "SELECT * FROM users WHERE username = '$user'";
         $stmt_check = $conn->prepare($sql_check);
         $stmt_check->execute();
-        
+
         if($stmt_check->rowCount() > 0){
             // Tên người dùng hoặc email đã tồn tại, hiển thị thông báo lỗi
             header("Location: register.php?error=Tên hoặc email đã tồn tại");
         }else{
             // Tên người dùng và email chưa tồn tại, thêm thông tin mới vào cơ sở dữ liệu
-            $sql_insert = "INSERT INTO users(username, password) VALUES ('$user', '$hashed_password')";     
+            $sql_insert = "INSERT INTO users VALUES ('$user', '$hashed_password', 0)";
             $stmt_insert = $conn->prepare($sql_insert);
             $stmt_insert->execute();
 
@@ -115,15 +115,15 @@ if(isset($_POST['Register'])){
             }
         ?>
         <div class = "box">
-            <h3 style = "color: white">Sign in</h3><hr>
+            <h3 style = "color: white">Register</h3><hr>
             <form action="register.php" method="post">
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="bi bi-person-fill"></i></span>
-                    <input type="text" class="form-control" placeholder="username" name ="username"     aria-describedby="addon-wrapping">
-                </div>  
+                    <input type="text" class="form-control" placeholder="Username" name ="Username" aria-describedby="addon-wrapping">
+                </div>
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="bi bi-key-fill"></i></span>
-                    <input type="text" class="form-control" placeholder="Password" name ="pass" aria-describedby="addon-wrapping">
+                    <input type="password" class="form-control" placeholder="Password" name ="Pass" aria-describedby="addon-wrapping">
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 60px;">
                     <button class="btn btn-warning" name = "Register" type = "submit">Register</button>

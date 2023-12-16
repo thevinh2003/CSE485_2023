@@ -1,44 +1,35 @@
 <?php
-if(isset($_POST['Login'])){
-    if(!empty($_POST['Username']) && !empty($_POST['Pass'])){
-        if(strlen($_POST['Username']) > 0 && strlen($_POST['Pass']) > 0) {
 
-            $user = $_POST['Username'];
-            $pass = $_POST['Pass'];
-        }
-        else
-            echo "Vui lòng điền";
-    }
-    else{
-        echo "Vui lòng điền";
-    }
-    //Truy van thong tin:
+session_start();
+if(isset($_SESSION['Login'])){
+    header("location:javascript://history.go(-1)");
+}
+if(isset($_POST['Login'])){
+    $user = $_POST['Username'];
+    $pass = $_POST['Pass'];
+
     try{
-        //Buoc 1: Ket noi DBServer
-        $conn = new PDO("mysql:host=localhost;dbname=btth01_cse485", "root", "123");
-        //Buoc 2: Thuc hien truy van
+        require 'connect.php';
         $sql_check = "SELECT * FROM users WHERE Username = '$user'";
         $stmt = $conn->prepare($sql_check);
         $stmt->execute();
-        //Buoc 3: Lay ra thong tin bao gom MAT KHAU
 
         if (!$stmt) {
             echo "Lỗi truy vấn: " . $conn->errorInfo()[2];
         } else{
             if($stmt->rowCount() > 0){
                 $users = $stmt->fetch();
-                //Lay ra mat khau
-                $pass_hash = $users[1];
+                $pass_hash = $users['password'];
                 if(password_verify($pass,$pass_hash)){
-                    //CAP THE (authentication - Not: authorization)
                     session_start();
-                    $_SESSION['Login'] = $users[1];
+                    $_SESSION['Login'] = $users['username'];
+                    $_SESSION['Admin'] = $users['isAdmin'] == 1 ? true : false;
                     header("Location:admin/index.php");
                 }else{
-                    header("Location:login.php?error=not-matched-password");
+                    header("Location:login.php?error=Mật khẩu không khớp");
                 }
             }else{
-                header("Location:login.php?error=not-existed");
+                header("Location:login.php?error=Người dùng không tồn tại");
             }
         }
 
@@ -137,11 +128,11 @@ if(isset($_POST['Login'])){
             <form action="login.php" method="POST">
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="bi bi-person-fill"></i></span>
-                    <input require type="text" class="form-control" placeholder="Username" name ="Username" aria-describedby="addon-wrapping">
+                    <input type="text" class="form-control" placeholder="Username" name ="Username" aria-describedby="addon-wrapping">
                 </div>
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping"><i class="bi bi-key-fill"></i></span>
-                    <input require type="text" class="form-control" placeholder="Password" name ="Pass" aria-describedby="addon-wrapping">
+                    <input type="password" class="form-control" placeholder="Password" name ="Pass" aria-describedby="addon-wrapping">
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
